@@ -10,3 +10,10 @@ resource "aws_vpc" "tf_vpc" {
         Owner = "tada"
     }
 }
+
+resource "aws_subnet" "tf_public" {
+    vpc_id = aws_vpc.tf_vpc.id
+    cidr_block = "10.10.0.0/24"
+    map_public_ip_on_launch = true
+    availability_zone = "ap-northeast-1"
+}
