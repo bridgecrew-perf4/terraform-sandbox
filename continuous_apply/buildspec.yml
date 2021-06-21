@@ -8,9 +8,12 @@ env:
     #TERRAFROM_CLOUD_TOKEN: "/continuous_apply/terraform_cloud_token"
 
 phases:
+  install:
+    commands:
+      - echo "start"
   pre_build:
     commands:
-      - docker login -u sadayoshitada0919 -p Bumpacid69%
+      # - docker login -u sadayoshitada0919 -p Bumpacid69%
   build:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/install.sh
