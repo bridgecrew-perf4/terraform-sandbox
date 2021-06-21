@@ -1,5 +1,7 @@
 version: 0.2
 
+
+
 env:
   parameter-store:
     GITHUB_TOKEN: "/continuous_apply/github_token"
@@ -9,11 +11,9 @@ phases:
   pre_build:
     commands:
       - docker login -u sadayoshitada0919 -p Bumpacid69%
-  install:
+  build:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/install.sh
-      #- sed -e "s/_TOKEN_/${TERRAFORM_CLOUD_TOKEN}/" ${CODEBUILD_SRC_DIR}/continuous_apply/_terraformrc > ~/.terraformrc
-
-  build:
+  post_build:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/build.sh
