@@ -12,7 +12,7 @@ phases:
   install:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/install.sh
-      - sed -e "s/_TOKEN_/${TERRAFORM_CLOUD_TOKEN}/" ${CODEBUILD_SRC_DIR}/continuous_apply/_terraformrc > ~/.terraformrc
+      #- sed -e "s/_TOKEN_/${TERRAFORM_CLOUD_TOKEN}/" ${CODEBUILD_SRC_DIR}/continuous_apply/_terraformrc > ~/.terraformrc
 
   build:
     commands:
