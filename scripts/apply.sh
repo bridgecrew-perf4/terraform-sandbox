@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/sh#!/bin/sh
 
-terrafrom init -input=false -no-color
-terrafrom apply -input=false -no-color -auto-approve
+terraform init -input=false -no-color
+terraform apply -input=false -no-color -auto-approve

@@ -2,7 +2,7 @@
 
 set -x
 
-if [[ ${CODEBUILD_WEBHOOK_TRIGGER} = 'branch/master' ]]; then
+if [[ ${CODEBUILD_WEBHOOK_TRIGGER} = 'branch/main' ]]; then
   ${CODEBUILD_SRC_DIR}/terraform/continuous_apply/scripts/apply.sh master
 elif [[ ${CODEBUILD_WEBHOOK_TRIGGER} = 'branch/develop' ]]; then
   ${CODEBUILD_SRC_DIR}/terraform/continuous_apply/scripts/apply.sh develop
