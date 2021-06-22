@@ -13,9 +13,15 @@ resource "aws_vpc" "tf_vpc" {
 
 resource "aws_subnet" "tf_public_subnet_1c" {
     vpc_id = aws_vpc.tf_vpc.id
-    cidr_block = "10.10.0.0/24"
+    cidr_block = "10.10.2.0/24"
     map_public_ip_on_launch = true
     availability_zone = "ap-northeast-1c"
+    
+    tags = {
+        Name = "tf-public-subnet-1c"
+        Owner = "tada"
+    }
+
 }
 
 resource "aws_subnet" "tf_public_subnet_1a" {
@@ -23,4 +29,9 @@ resource "aws_subnet" "tf_public_subnet_1a" {
     cidr_block = "10.10.1.0/24"
     map_public_ip_on_launch = true
     availability_zone = "ap-northeast-1a"
+
+    tags = {
+        Name = "tf-public-subnet-1a"
+        Owner = "tada"
+    }
 }
