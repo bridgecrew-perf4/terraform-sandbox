@@ -1,5 +1,5 @@
 module "continuous_apply_codebuild_role" {
-  source     = "../module/iam"
+  source     = "./module/iam"
   name       = "continuous-apply"
   identifier = "codebuild.amazonaws.com"
   policy     = data.aws_iam_policy.administrator_access.policy
