@@ -1,6 +1,6 @@
 module "continuous_apply_codebuild_role" {
   source     = "./module/iam"
-  name       = "continuous-apply"
+  name       = "tag-release-test-role"
   identifier = "codebuild.amazonaws.com"
   policy     = data.aws_iam_policy.administrator_access.policy
 }
@@ -33,7 +33,7 @@ resource "aws_codebuild_project" "tag_release_build" {
 
 }
 
-resource "aws_codebuild_webhook" "continuous_apply" {
+resource "aws_codebuild_webhook" "tag_release_build_webhook" {
   project_name = aws_codebuild_project.tag_release_build.name
 
   filter_group {
