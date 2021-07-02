@@ -81,7 +81,7 @@ resource "aws_codebuild_webhook" "tag_release_build_webhook" {
 
     filter {
       type    = "HEAD_REF"
-      pattern = "^refs/tags/v1.0"
+      pattern = "^refs/tags/v*"
     }
   }
 }
