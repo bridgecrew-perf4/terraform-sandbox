@@ -28,6 +28,22 @@ resource "aws_codebuild_project" "tag_release_build" {
     compute_type    = "BUILD_GENERAL1_SMALL"
     image           = "aws/codebuild/standard:3.0"
     privileged_mode = true
+
+    environment_variable {
+      name = "AWS_DEFAULT_REGION"
+      value = "${var.region}"
+    }
+
+    environment_variable {
+      name = "AWS_ACCOUNT_ID"
+      value = "${var.account}"
+    }
+
+    environment_variable {
+      name = "IMAGE_REPO_NAME"
+      value = "simple-express-repository"
+    }
+
   }
 
 
