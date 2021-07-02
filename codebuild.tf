@@ -27,7 +27,7 @@ resource "aws_codebuild_project" "tag_release_build" {
     type            = "LINUX_CONTAINER"
     compute_type    = "BUILD_GENERAL1_SMALL"
     image           = "aws/codebuild/standard:3.0"
-    privileged_mode = false
+    privileged_mode = true
   }
 
 
