@@ -13,7 +13,7 @@ phases:
       - echo "start"
   pre_build:
     commands:
-      # - docker login -u sadayoshitada0919 -p Bumpacid69%
+      # - docker login -u $dockerhub_username -p $dockerhub_password
   build:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/install.sh
