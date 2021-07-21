@@ -1,0 +1,11 @@
+#ref.https://qiita.com/Tocyuki/items/0cb655e6357d9bf0c40f
+version: '3.6'
+
+services: 
+    terraform:
+        image: hashicorp/terraform
+        container_name: terraform
+        volumes:
+            - ./terraform:/terraform
+        env_file: .env
+        working_dir: /terraform

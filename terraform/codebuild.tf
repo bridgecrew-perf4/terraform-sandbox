@@ -30,17 +30,17 @@ resource "aws_codebuild_project" "tag_release_build" {
     privileged_mode = true
 
     environment_variable {
-      name = "AWS_DEFAULT_REGION"
-      value = "${var.region}"
+      name  = "AWS_DEFAULT_REGION"
+      value = var.region
     }
 
     environment_variable {
-      name = "AWS_ACCOUNT_ID"
-      value = "${var.account}"
+      name  = "AWS_ACCOUNT_ID"
+      value = var.account
     }
 
     environment_variable {
-      name = "IMAGE_REPO_NAME"
+      name  = "IMAGE_REPO_NAME"
       value = "simple-express-repository"
     }
 
