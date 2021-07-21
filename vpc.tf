@@ -35,3 +35,14 @@ resource "aws_subnet" "tf_public_subnet_1a" {
         Owner = "tada"
     }
 }
+
+resource "aws_subnet" "tf_private_subnet_1a" {
+    vpc_id = aws_vpc.tf_vpc.id
+    cidr_block = "10.10.3.0/24"
+    availability_zone = "ap-northeast-1a"
+
+    tags = {
+        Name = "tf-private-subnet-1a"
+        Owner = "tada"
+    }
+}
