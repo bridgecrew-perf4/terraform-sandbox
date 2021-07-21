@@ -9,11 +9,15 @@ env:
 
 phases:
   install:
+    runtime-versions:
+      golang: 1.12
     commands:
-      - echo "start"
+      - git clone https://github.com/tfutils/tfenv.git ~/.tfenv
+      - ln -s ~/.tfenv/bin/* /usr/local/bin
+      - tfenv install 1.0.0
   pre_build:
     commands:
-      # - docker login -u $dockerhub_username -p $dockerhub_password
+      - docker login -u $dockerhub_username -p $dockerhub_password
   build:
     commands:
       - ${CODEBUILD_SRC_DIR}/scripts/install.sh
