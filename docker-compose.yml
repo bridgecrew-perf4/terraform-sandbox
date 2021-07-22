@@ -1,9 +1,9 @@
 #ref.https://qiita.com/Tocyuki/items/0cb655e6357d9bf0c40f
-version: '3.6'
+version: '3'
 
 services: 
     terraform:
-        image: hashicorp/terraform
+        image: hashicorp/terraform:1.0.3
         container_name: terraform
         volumes:
             - ./terraform:/terraform
