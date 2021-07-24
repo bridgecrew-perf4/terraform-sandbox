@@ -6,6 +6,6 @@ services:
         image: hashicorp/terraform:1.0.3
         container_name: terraform
         volumes:
-            - ./terraform:/terraform
+            - ./aws:/terraform
         env_file: .env
         working_dir: /terraform
