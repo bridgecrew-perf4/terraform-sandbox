@@ -1,4 +1,5 @@
-.PHONY: init plan apply destroy check
+.PHONY: init plan apply destroy check force-unlock
+ARG="default"
 
 init: 
 	@docker-compose run --rm terraform init
@@ -11,6 +12,9 @@ apply:
 
 destroy: 
 	@docker-compose run --rm terraform destroy
+
+force-unlock:
+	@docker-compose run --rm terraform force-unlock ${ARG}
 
 check:
 	@docker-compose run --rm terraform fmt -recursive
