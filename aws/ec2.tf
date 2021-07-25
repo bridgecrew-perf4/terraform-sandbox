@@ -47,7 +47,7 @@ resource "aws_spot_fleet_request" "isucon-spot-request" {
     instance_type               = "t3.small"
     key_name                    = "kensyo-key"
     vpc_security_group_ids      = ["sg-0a20405a84445e7a3"]
-    subnet_id                   = "subnet-03eff9673836cf8c1"
+    subnet_id                   = aws_subnet.tf_public_subnet_1a
     associate_public_ip_address = true
 
     root_block_device {
