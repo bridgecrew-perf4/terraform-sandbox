@@ -7,7 +7,7 @@ variable "spot_instance_ami" {
 }
 
 variable "gp2_volume_size" {
-  default = 20
+  default = 50
 }
 
 variable "spot_target_capacity" {
