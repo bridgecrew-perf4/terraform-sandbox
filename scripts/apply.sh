@@ -15,9 +15,7 @@ for FILE in $(git diff HEAD^..HEAD --diff-filter=AM --name-only -- "*.tf" --rela
     terraform init -input=false -no-color
     terraform apply -input=false -no-color -auto-approve | \
     tfnotify --config ${CODEBUILD_SRC_DIR}/tfnotify.yml apply --message "$(date)"
-    cd $CURRENT_DIR
   elif [ -z "$RES" ]; then
     echo "tf files nothing"
-    cd $CURRENT_DIR
   fi
 done
