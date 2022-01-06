@@ -1,5 +1,5 @@
 module "continuous_apply_codebuild_role" {
-  source     = "./module/iam"
+  source     = "../module/iam"
   name       = "tag-release-test-role"
   identifier = "codebuild.amazonaws.com"
   policy     = data.aws_iam_policy.administrator_access.policy
@@ -16,17 +16,43 @@ resource "aws_codebuild_project" "tag_release_build" {
   source {
     type      = "GITHUB"
     location  = "https://github.com/tasogare0919/apprunner-express-app"
-    buildspec = "buildspec.yml"
+    buildspec = <<-EOT
+     version: 0.2
+     
+     env:
+       git-credential-helper: yes
+     
+     phases:
+       install:
+         runtime-versions:
+           nodejs: 12
+         commands:
+           - echo Checkout tags
+           - git fetch --tags
+           - |
+             if [ "$RECOVEY_TAG_VERSION" = "" ]; then
+               git checkout $(git describe --tags --abbrev=0)
+             else
+               git checkout $RECOVEY_TAG_VERSION
+             fi
+    EOT
   }
 
   artifacts {
     type = "NO_ARTIFACTS"
   }
 
+  cache {
+    modes = [
+      "LOCAL_DOCKER_LAYER_CACHE"
+    ]
+    type = "LOCAL"
+  }
+
   environment {
     type            = "LINUX_CONTAINER"
-    compute_type    = "BUILD_GENERAL1_SMALL"
-    image           = "aws/codebuild/standard:3.0"
+    compute_type    = "BUILD_GENERAL1_MEDIUM"
+    image           = "aws/codebuild/amazonlinux2-x86_64-standard:3.0"
     privileged_mode = true
 
     environment_variable {
@@ -42,6 +68,17 @@ resource "aws_codebuild_project" "tag_release_build" {
     environment_variable {
       name  = "IMAGE_REPO_NAME"
       value = "simple-express-repository"
+    }
+
+    environment_variable {
+      name  = "UPLOAD_BUCKET_NAME"
+      type  = "PLAINTEXT"
+      value = "s3tada-bucket"
+    }
+    environment_variable {
+       name  = "TRIVY_VERSION"
+       type  = "PLAINTEXT"
+       value = "0.19.2"
     }
 
   }
