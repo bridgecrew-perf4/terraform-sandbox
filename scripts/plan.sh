@@ -1,9 +1,6 @@
 #!/bin/sh
-
-cd ${CODEBUILD_SRC_DIR}/aws
-
 CURRENT_DIR=`pwd`
-for FILE in $(git diff HEAD^..HEAD --diff-filter=AM --name-only -- "*.tf") ; do
+for FILE in $(git diff origin/main --diff-filter=AM --name-only -- "*.tf" --relative –no-prefix aws) ; do
   cd $(dirname ${FILE}); cd ../
   RES=`\find . -name "*.tf" -maxdepth 1 2> /dev/null`
   if [ -n "$RES" ]; then
