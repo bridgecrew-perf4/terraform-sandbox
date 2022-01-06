@@ -94,3 +94,4 @@ resource "aws_route_table_association" "public_1c" {
   subnet_id      = aws_subnet.tf_public_subnet_1c.id
   route_table_id = aws_route_table.public.id
 }
+
