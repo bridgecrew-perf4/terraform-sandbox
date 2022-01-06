@@ -8,7 +8,7 @@ CODEBUILD_SOURCE_VERSION=$(echo ${MESSAGE} | cut -f4 -d' ' | sed 's/#/pr\//')
 # terraform apply -input=false -no-color -auto-approve | \
 # tfnotify --config ${CODEBUILD_SRC_DIR}/tfnotify.yml apply --message "$(date)"
 
-for FILE in $(git diff origin/main --diff-filter=AM --name-only -- "*.tf" --relative –no-prefix aws) ; do
+for FILE in $(git diff HEAD^..HEAD --diff-filter=AM --name-only -- "*.tf" --relative –no-prefix aws) ; do
   cd $(dirname ${FILE})
   RES=`\find . -name "*.tf" -maxdepth 1 2> /dev/null`
   if [ -n "$RES" ]; then
