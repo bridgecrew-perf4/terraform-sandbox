@@ -1,5 +1,6 @@
 #!/bin/sh
 DIFF_FILES=$(git diff origin/main --diff-filter=AM --name-only -- "*.tf" --relative –no-prefix aws) ; do
+echo ${DIFF_FILES}
 cd $(dirname ${DIFF_FILES})
 RES=`\find . -name "*.tf" -maxdepth 1 2> /dev/null`
 if [ -n "$RES" ]; then
