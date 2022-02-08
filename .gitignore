@@ -29,5 +29,4 @@ override.tf.json
 # example: *tfplan*
 *.env
 *.terraform.lock.hcl
-*.json
 *secrets.yaml
