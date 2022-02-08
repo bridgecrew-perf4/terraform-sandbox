@@ -25,17 +25,6 @@ data "aws_iam_policy_document" "github_oidc_assume_role_policy" {
     }
 }
 
-# data "aws_iam_policy_document" "github_actions" {
-#     statement {
-#       effect = "Allow"
-#       actions = [
-#           "ecr:GetAuthorizationToken", 
-#           "ecr:BatchCheckLayerAvailability"
-#         ]
-#       resources = ["*"]
-#     }
-# }
-
 resource "aws_iam_policy" "gihub_actions_policy" {
     name = "githubactions_policy"
     path = "/"
