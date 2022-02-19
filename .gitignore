@@ -31,3 +31,4 @@ override.tf.json
 *.terraform.lock.hcl
 *secrets.yaml
 *.tfvars
+node_modules/
