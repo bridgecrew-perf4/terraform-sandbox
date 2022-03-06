@@ -1,0 +1,14 @@
+---
+checks:
+- code: CUS001
+  description: Check if the default tag set for all supported resources.
+  errorMessage: The required terraform tag was missing
+  matchSpec:
+    action: contains
+    name: tags
+    value: terraform
+  requiredTypes:
+  - resource
+  requiredLabels:
+  - aws_*
+  severity: ERROR 
