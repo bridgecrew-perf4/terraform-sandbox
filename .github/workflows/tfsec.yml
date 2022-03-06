@@ -3,7 +3,7 @@ on:
   pull_request:
 
 jobs:
-  tfsec_check:
+  tfsec:
     runs-on: ubuntu-latest
 
     steps:
