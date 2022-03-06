@@ -14,7 +14,8 @@ jobs:
         uses: reviewdog/action-tfsec@master
         with:
           github_token: ${{ secrets.github_token }}
-          level: error 
+          level: info
+          working_directory: aws
           reporter: github-pr-review 
           fail_on_error: true
           filter_mode: nofilter
