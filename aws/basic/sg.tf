@@ -19,6 +19,7 @@ resource "aws_security_group" "ecr_vpcendpoint_sg" {
 
   tags = {
       Name = "ecr-vpc-endpoint-sg"
+      terraform = true
   }
 }
 
