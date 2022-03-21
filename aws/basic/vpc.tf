@@ -33,6 +33,7 @@ resource "aws_subnet" "tf_public_subnet_1a" {
   tags = {
     Name  = "tf-public-subnet-1a"
     Owner = "tada"
+    test = "hoge"
   }
 }
 
