@@ -1,22 +1,46 @@
-.PHONY: init plan apply destroy check force-unlock
-ARG="default"
+# VERSION は環境変数として .git-pr-release-template の中で読み込まれる
+VERSION ?= ""
+DRY_RUN ?= ""
+DRY_RUN_OPTION :=
 
-init: 
-	@docker-compose run --rm terraform init
+ifneq ($(DRY_RUN),"")
+	DRY_RUN_OPTION="-n"
+endif
 
-plan: 
-	@docker-compose run --rm terraform plan
+.PHONY: help
+.SILENT: pr-rel-stg pr-rel-prd
 
-apply: 
-	@docker-compose run --rm terraform apply
+help:
+	@echo ""
+	@echo "[dev] to [stg]"
+	@echo "    make pr-rel-stg [DRY_RUN=1]"
+	@echo ""
+	@echo "[stg] to [prd]"
+	@echo "    make pr-rel-prd VERSION=[version] [DRY_RUN=1]"
+	@echo ""
 
-destroy: 
-	@docker-compose run --rm terraform destroy
+pr-rel-stg:
+	@echo "Creating PR from develop to staging..."
+	@GIT_PR_RELEASE_BRANCH_PRODUCTION=staging \
+		GIT_PR_RELEASE_BRANCH_STAGING=develop \
+		GIT_PR_RELEASE_TEMPLATE=./.git-pr-release-template \
+		git-pr-release ${DRY_RUN_OPTION}
+	@echo "done."
 
-force-unlock:
-	@docker-compose run --rm terraform force-unlock ${ARG}
+check-version:
+ifeq ($(VERSION),"")
+	@echo "Need to specify VERSION"
+	make help
+	exit 1
+else
+	@echo ${VERSION} | grep -E -o '[0-9]+\.[0-9]+\.[0-9]+[-+.[:alnum:]]{0,}' || (echo "invalid version format"; exit 1)
+endif
 
-check:
-	@docker-compose run --rm terraform fmt -recursive
-	@docker-compose run --rm terraform fmt -check
-	@docker-compose run --rm terraform validate
+pr-rel-prd: check-version
+	@echo "VERSION: ${VERSION}"
+	@echo "Creating PR from staging to main..."
+	@GIT_PR_RELEASE_BRANCH_PRODUCTION=main \
+		GIT_PR_RELEASE_BRANCH_STAGING=staging \
+		GIT_PR_RELEASE_TEMPLATE=./.git-pr-release-template \
+		git-pr-release ${DRY_RUN_OPTION}
+	@echo "done."

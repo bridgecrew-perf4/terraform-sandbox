@@ -3,7 +3,5 @@ resource "aws_s3_bucket" "test" {
 
     tags = {
         Name = "my-tf-test-${var.account}"
-        confidentiality = "confidential"
     }
 }
-
